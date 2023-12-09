@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.github.freiheitstools.httpproblemdetails</groupId>
+  <artifactId>http-problem-details-parent</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>HTTP Problem Details Parent</name>
+
+  <properties>
+    <!-- All project specific properties to control versions and behavior during
+         a Maven run. Prefix must be fhpd!!!
+      -->
+    <fhpd.required-java.version>17</fhpd.required-java.version>
+    <fhpd.required-maven.version>3.8.6</fhpd.required-maven.version>
+
+    <fhpd.buildplan-maven-plugin.version>2.2.2</fhpd.buildplan-maven-plugin.version>
+    <fhpd.maven-clean-plugin.version>3.2.0</fhpd.maven-clean-plugin.version>
+    <fhpd.maven-compiler-plugin.version>3.11.0</fhpd.maven-compiler-plugin.version>
+    <fhpd.maven-deploy-plugin.version>3.1.1</fhpd.maven-deploy-plugin.version>
+    <fhpd.maven-enforcer-plugin.version>3.4.1</fhpd.maven-enforcer-plugin.version>
+    <fhpd.maven-gpg-plugin.version>3.1.0</fhpd.maven-gpg-plugin.version>
+    <fhpd.maven-install-plugin.version>3.1.1</fhpd.maven-install-plugin.version>
+    <fhpd.maven-jar-plugin.version>3.3.0</fhpd.maven-jar-plugin.version>
+    <fhpd.maven-javadoc-plugin.version>3.6.3</fhpd.maven-javadoc-plugin.version>
+    <fhpd.maven-resources-plugin.version>3.3.1</fhpd.maven-resources-plugin.version>
+    <fhpd.maven-site-plugin.version>3.12.1</fhpd.maven-site-plugin.version>
+    <fhpd.maven-source-plugin.version>3.3.0</fhpd.maven-source-plugin.version>
+    <fhpd.maven-surefire-plugin.version>3.1.2</fhpd.maven-surefire-plugin.version>
+    <fhpd.nexus-staging-maven-plugin.version>1.6.13</fhpd.nexus-staging-maven-plugin.version>
+
+
+    <maven.compiler.source>${fhpd.required-java.version}</maven.compiler.source>
+    <maven.compiler.target>${fhpd.required-java.version}</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <modules>
+    <module>http-problem-details-base</module>
+    <module>http-problem-details-4-spring-boot-3</module>
+  </modules>
+
+  <build>
+    <defaultGoal>clean install</defaultGoal>
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${fhpd.maven-gpg-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${fhpd.nexus-staging-maven-plugin.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <serverId>ossrh</serverId>
+            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${fhpd.maven-source-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${fhpd.maven-javadoc-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>buildplan-maven-plugin</artifactId>
+          <version>${fhpd.buildplan-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <inherited>true</inherited>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${fhpd.maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-proper-config</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>${fhpd.required-maven.version}</version>
+                  </requireMavenVersion>
+                  <requireJavaVersion>
+                    <version>${fhpd.required-java.version}</version>
+                  </requireJavaVersion>
+                  <requirePluginVersions>
+                    <message>It is required to pin each plugin to a specific version</message>
+                    <banLatest>true</banLatest>
+                    <banRelease>true</banRelease>
+                    <banSnapshots>true</banSnapshots>
+                    <phases>clean,deploy,site</phases>
+                  </requirePluginVersions>
+                </rules>
+                <fail>true</fail>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>${fhpd.maven-clean-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${fhpd.maven-compiler-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${fhpd.maven-deploy-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>${fhpd.maven-site-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <version>${fhpd.maven-install-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${fhpd.maven-surefire-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${fhpd.maven-jar-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${fhpd.maven-resources-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <inherited>true</inherited>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildplan-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>show-build-plan</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>list</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <description>
+      Parent with common settings for all other HTTP Problem Details components.
+  </description>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <scm>
+    <connection>scm:git:https://github.com/freiheitstools/fhg-http-problem-details.git</connection>
+    <url>https://github.com/freiheitstools/fhg-http-problem-details</url>
+  </scm>
+
+  <licenses>
+    <license>
+      <name>Apache-2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>oliver.b.fischer</id>
+      <name>Oliver B. Fischer</name>
+    </developer>
+  </developers>
+</project>
