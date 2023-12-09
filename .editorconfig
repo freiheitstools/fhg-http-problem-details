@@ -1,0 +1,26 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = false
+max_line_length = 120
+tab_width = 2
+
+[{*.http,*.rest}]
+indent_size = 0
+insert_final_newline = true
+
+[*.java]
+insert_final_newline = true
+
+[*.xml]
+insert_final_newline = true
+
+[{*.yaml,*.yml}]
+insert_final_newline = true
+
+[*.json]
+insert_final_newline = true
