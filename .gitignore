@@ -1,6 +1,7 @@
 ### Intellij
 .idea/
 *.iws                   # File-based project format
+*.iml
 out/
 .idea/httpRequests      # Editor-based Rest Client
 

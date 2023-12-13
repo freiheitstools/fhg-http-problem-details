@@ -18,7 +18,9 @@
     <fhpd.required-java.version>17</fhpd.required-java.version>
     <fhpd.required-maven.version>3.8.6</fhpd.required-maven.version>
 
+    <fhtd.assertj-core.version>3.24.2</fhtd.assertj-core.version>
     <fhpd.buildplan-maven-plugin.version>2.2.2</fhpd.buildplan-maven-plugin.version>
+    <fhpd.junit-bom.version>5.10.1</fhpd.junit-bom.version>
     <fhpd.maven-clean-plugin.version>3.2.0</fhpd.maven-clean-plugin.version>
     <fhpd.maven-compiler-plugin.version>3.11.0</fhpd.maven-compiler-plugin.version>
     <fhpd.maven-deploy-plugin.version>3.1.1</fhpd.maven-deploy-plugin.version>
@@ -34,7 +36,6 @@
     <fhpd.nexus-staging-maven-plugin.version>1.6.13</fhpd.nexus-staging-maven-plugin.version>
     <fhtd.pitest-junit-version>1.2.1</fhtd.pitest-junit-version>
     <fhtd.pitest-maven-plugin.version>1.15.3</fhtd.pitest-maven-plugin.version>
-
 
     <fhtd.pitest-min-coverage>95</fhtd.pitest-min-coverage>
     <maven.compiler.source>${fhpd.required-java.version}</maven.compiler.source>
@@ -230,6 +231,24 @@
       </plugin>
     </plugins>
   </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${fhpd.junit-bom.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${fhtd.assertj-core.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <description>
       Parent with common settings for all other HTTP Problem Details components.
