@@ -32,8 +32,11 @@
     <fhpd.maven-source-plugin.version>3.3.0</fhpd.maven-source-plugin.version>
     <fhpd.maven-surefire-plugin.version>3.1.2</fhpd.maven-surefire-plugin.version>
     <fhpd.nexus-staging-maven-plugin.version>1.6.13</fhpd.nexus-staging-maven-plugin.version>
+    <fhtd.pitest-junit-version>1.2.1</fhtd.pitest-junit-version>
+    <fhtd.pitest-maven-plugin.version>1.15.3</fhtd.pitest-maven-plugin.version>
 
 
+    <fhtd.pitest-min-coverage>95</fhtd.pitest-min-coverage>
     <maven.compiler.source>${fhpd.required-java.version}</maven.compiler.source>
     <maven.compiler.target>${fhpd.required-java.version}</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -48,7 +51,30 @@
     <defaultGoal>clean install</defaultGoal>
     <pluginManagement>
       <plugins>
-
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>${fhtd.pitest-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>mutation-tests</id>
+              <phase>test</phase>
+              <goals>
+                <goal>mutationCoverage</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <mutationThreshold>${fhtd.pitest-min-coverage}</mutationThreshold>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.pitest</groupId>
+              <artifactId>pitest-junit5-plugin</artifactId>
+              <version>${fhtd.pitest-junit-version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-gpg-plugin</artifactId>
@@ -140,6 +166,10 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
