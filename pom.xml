@@ -40,6 +40,8 @@
     <fhtd.pitest-min-coverage>95</fhtd.pitest-min-coverage>
     <maven.compiler.source>${fhpd.required-java.version}</maven.compiler.source>
     <maven.compiler.target>${fhpd.required-java.version}</maven.compiler.target>
+    <maven.compiler.testTarget>${fhpd.required-java.version}</maven.compiler.testTarget>
+    <maven.compiler.testSource>${fhpd.required-java.version}</maven.compiler.testSource>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
