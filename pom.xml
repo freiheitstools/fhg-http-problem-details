@@ -42,6 +42,10 @@
     <maven.compiler.target>${fhpd.required-java.version}</maven.compiler.target>
     <maven.compiler.testTarget>${fhpd.required-java.version}</maven.compiler.testTarget>
     <maven.compiler.testSource>${fhpd.required-java.version}</maven.compiler.testSource>
+
+    <fhtd.language-level.main>17</fhtd.language-level.main>
+    <fhtd.language-level.test>17</fhtd.language-level.test>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -182,6 +186,20 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${fhpd.maven-compiler-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <configuration>
+              <release>${fhtd.language-level.main}</release>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <configuration>
+              <release>${fhtd.language-level.test}</release>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

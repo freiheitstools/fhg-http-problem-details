@@ -191,7 +191,7 @@ public class VanillaHttpProblemDetail {
       .map(Object::toString)
       .collect(Collectors.joining(" - "));
 
-    if (toString.isBlank()) {
+    if (toString == null || toString.trim().isEmpty()) {
       return "n/a";
     }
 

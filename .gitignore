@@ -19,3 +19,6 @@ buildNumber.properties
 
 ### jEnv
 .java-version
+
+### MacOS
+.DS_store
