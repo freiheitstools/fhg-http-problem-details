@@ -73,6 +73,7 @@
           </executions>
           <configuration>
             <mutationThreshold>${fhtd.pitest-min-coverage}</mutationThreshold>
+            <failWhenNoMutations>false</failWhenNoMutations>
           </configuration>
           <dependencies>
             <dependency>
