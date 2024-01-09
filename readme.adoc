@@ -1,0 +1,16 @@
+= HTTP Problem Details 4 for Java
+
+[abstract]
+Writing helpful error responses for HTTP and REST based APIs is still a challenge. The aim of this library to provide a ready to use Java implementation of RFC 9457 Problem Details for HTTP APIs with support for various frameworks or for direct usage without any framework to support API implementors in providing better APIs.
+
+
+
+== Primary Objective
+
+Provide an easy-to-use Java library to ease the adaption of _RFC 9457: Problem Details for HTTP APIs_ for Java based applications, which is also easy to adapt to application specific requirements.
+
+== Secondary objectives
+
+* Provide Useful documentation to ease the usage of the library and to support its quick adaption
+* Use Minimal dependencies to other libraries to avoid the dependency hell we often suffer from
+* Ensure a high test coverage to protect users from implementation errors
