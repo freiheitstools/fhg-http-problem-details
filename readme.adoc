@@ -14,3 +14,12 @@ Provide an easy-to-use Java library to ease the adaption of _RFC 9457: Problem D
 * Provide Useful documentation to ease the usage of the library and to support its quick adaption
 * Use Minimal dependencies to other libraries to avoid the dependency hell we often suffer from
 * Ensure a high test coverage to protect users from implementation errors
+
+== Things, you should have read
+
+The following sources provide a good introduction to the topic and also serve as a usage reference:
+
+* https://datatracker.ietf.org/doc/html/rfc9457[RFC 9457 - Problem Details for HTTP APIs^]
+* https://datatracker.ietf.org/doc/html/rfc7807[RFC 7807 - Problem Details for HTTP APIs^] (obsoleted predecessor)
+* https://www.codecentric.de/wissens-hub/blog/charge-your-apis-volume-19-understanding-problem-details-for-http-apis-a-deep-dive-into-rfc-7807-and-rfc-9457[Charge your APIs Volume 19: Understanding Problem Details for HTTP APIs - A Deep Dive into RFC 7807 and RFC 9457]
+
